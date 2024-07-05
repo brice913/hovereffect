@@ -11,6 +11,7 @@ class DistortionHoverEffect {
   }
 
   init() {
+    console.log(`Initializing DistortionHoverEffect for ${this.parent}`);
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera(
       this.parent.offsetWidth / -2,
@@ -36,9 +37,10 @@ class DistortionHoverEffect {
     const loader = new THREE.TextureLoader();
     loader.crossOrigin = '';
 
-    this.texture1 = loader.load(this.image1);
-    this.texture2 = loader.load(this.image2);
+    this.texture1 = loader.load(this.image1, () => console.log(`Loaded image1: ${this.image1}`));
+    this.texture2 = loader.load(this.image2, () => console.log(`Loaded image2: ${this.image2}`));
     this.disp = loader.load(this.displacementImage, () => {
+      console.log(`Loaded displacement image: ${this.displacementImage}`);
       this.setupScene();
     });
 
